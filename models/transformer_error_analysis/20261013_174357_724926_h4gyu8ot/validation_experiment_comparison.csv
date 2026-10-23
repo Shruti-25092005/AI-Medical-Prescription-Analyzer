@@ -1,0 +1,2 @@
+﻿num_beams,max_new_tokens,images,exact_match_percent,mean_per_record_cer,mean_per_record_wer,corpus_cer,corpus_wer,mean_generation_seconds_per_image,outputs_at_max_new_tokens
+2,24,2,0.0,0.55,0.75,0.35714285714285715,0.6666666666666666,10.455658499966376,0

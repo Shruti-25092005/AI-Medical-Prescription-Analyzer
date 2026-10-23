@@ -1,0 +1,3 @@
+﻿image,reference,prediction,exact_match,cer,wer,generated_tokens,hit_max_new_tokens,inference_seconds
+P1413.jpg,Nabu,nalocu,False,1.0,1.0,6,False,10.455658499966376
+P2085.jpg,Fxsid Plus,Fasid Plus,False,0.1,0.5,6,False,10.455658499966376

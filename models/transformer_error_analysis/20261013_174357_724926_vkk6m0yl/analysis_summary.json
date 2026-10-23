@@ -1,0 +1,271 @@
+{
+  "source": "C:\\Users\\sama\\Downloads\\AI_Prescription_Analyzer\\models\\transformer_evaluation.csv",
+  "split": "saved test evaluation; descriptive analysis only",
+  "evaluated_images": 1115,
+  "case_insensitive_exact_match_percent": 32.46636771300449,
+  "mean_per_record_cer": 0.4578156198559786,
+  "mean_per_record_wer": 0.8164424514200298,
+  "corpus_cer": 0.463481228668942,
+  "corpus_wer": 0.8302344381568311,
+  "mean_recorded_generation_seconds_per_image": 4.07153429560428,
+  "raw_text_differences_in_error_csv": 868,
+  "edit_alignment_counts": {
+    "non_case_exact_mismatches": 753,
+    "rows_with_mixed": 423,
+    "substitutions": 1598,
+    "missing_characters": 644,
+    "extra_characters": 808,
+    "no_exact_word_token_shared": 716,
+    "rows_with_substitution": 240,
+    "rows_with_missing": 64,
+    "case_only_differences": 115,
+    "rows_with_extra": 26
+  },
+  "top_substitutions": [
+    [
+      "e -> o",
+      38
+    ],
+    [
+      "a -> e",
+      35
+    ],
+    [
+      "a -> o",
+      32
+    ],
+    [
+      "t -> f",
+      28
+    ],
+    [
+      "o -> a",
+      28
+    ],
+    [
+      "i -> o",
+      27
+    ],
+    [
+      "o -> e",
+      23
+    ],
+    [
+      "e -> a",
+      19
+    ],
+    [
+      "i -> e",
+      19
+    ],
+    [
+      "s -> o",
+      19
+    ],
+    [
+      "l -> t",
+      18
+    ],
+    [
+      "n -> v",
+      18
+    ],
+    [
+      "m -> n",
+      17
+    ],
+    [
+      "i -> a",
+      17
+    ],
+    [
+      "e -> c",
+      17
+    ],
+    [
+      "u -> e",
+      17
+    ],
+    [
+      "x -> v",
+      16
+    ],
+    [
+      "l -> n",
+      14
+    ],
+    [
+      "n -> r",
+      14
+    ],
+    [
+      "<space> -> -",
+      14
+    ]
+  ],
+  "top_missing_characters": [
+    [
+      "i",
+      64
+    ],
+    [
+      "n",
+      56
+    ],
+    [
+      "r",
+      48
+    ],
+    [
+      "l",
+      46
+    ],
+    [
+      "a",
+      45
+    ],
+    [
+      "e",
+      41
+    ],
+    [
+      "o",
+      39
+    ],
+    [
+      "u",
+      34
+    ],
+    [
+      "<space>",
+      31
+    ],
+    [
+      "s",
+      27
+    ],
+    [
+      "c",
+      24
+    ],
+    [
+      "t",
+      22
+    ],
+    [
+      "m",
+      22
+    ],
+    [
+      "d",
+      20
+    ],
+    [
+      "p",
+      19
+    ],
+    [
+      "x",
+      15
+    ],
+    [
+      "g",
+      11
+    ],
+    [
+      "b",
+      10
+    ],
+    [
+      "v",
+      10
+    ],
+    [
+      "f",
+      10
+    ]
+  ],
+  "top_extra_characters": [
+    [
+      "o",
+      147
+    ],
+    [
+      "a",
+      99
+    ],
+    [
+      "b",
+      90
+    ],
+    [
+      "i",
+      57
+    ],
+    [
+      "d",
+      57
+    ],
+    [
+      "<space>",
+      48
+    ],
+    [
+      "t",
+      43
+    ],
+    [
+      "l",
+      40
+    ],
+    [
+      "c",
+      27
+    ],
+    [
+      "r",
+      25
+    ],
+    [
+      "p",
+      23
+    ],
+    [
+      "e",
+      21
+    ],
+    [
+      "2",
+      20
+    ],
+    [
+      "0",
+      20
+    ],
+    [
+      "n",
+      16
+    ],
+    [
+      "u",
+      12
+    ],
+    [
+      "v",
+      10
+    ],
+    [
+      "f",
+      9
+    ],
+    [
+      "m",
+      9
+    ],
+    [
+      "k",
+      7
+    ]
+  ],
+  "note": "This report describes the existing test predictions. Do not use it to choose preprocessing or decoding settings."
+}

@@ -1,0 +1,10 @@
+torch
+torchvision
+transformers
+Pillow
+pandas
+jiwer
+matplotlib
+streamlit
+pypdfium2
+opencv-python-headless>=4.10,<5

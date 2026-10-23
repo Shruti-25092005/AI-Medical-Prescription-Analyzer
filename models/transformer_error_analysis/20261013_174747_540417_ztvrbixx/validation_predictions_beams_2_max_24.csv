@@ -1,0 +1,448 @@
+﻿image,reference,prediction,exact_match,cer,wer,generated_tokens,hit_max_new_tokens,inference_seconds
+P1413.jpg,Nabu,nalocu,False,1.0,1.0,6,False,3.9398608749907
+P2085.jpg,Fxsid Plus,Fasid Plus,False,0.1,0.5,6,False,3.9398608749907
+P3153.jpg,Timptin,Tabletin,False,0.5714285714285714,1.0,5,False,3.9398608749907
+P1714.jpg,Detfacf,Detfacf,True,0.0,0.0,5,False,3.9398608749907
+P3937.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.613030450011138
+P3287.jpg,Nalbun,nalbun,True,0.16666666666666666,1.0,6,False,3.613030450011138
+P5377.jpg,filmet,Filcef,False,0.5,1.0,5,False,3.613030450011138
+P3020.jpg,Novelin lite,Noven Lite,False,0.25,1.0,5,False,3.613030450011138
+P2332.jpg,Becobion,becobion,True,0.125,1.0,5,False,2.925991950003663
+P1793.jpg,Nufw,Nufw,True,0.0,0.0,5,False,2.925991950003663
+P2172.jpg,Tiginor,Tigor,False,0.2857142857142857,1.0,5,False,2.925991950003663
+P1892.jpg,Fenafir,Feniv,False,0.42857142857142855,1.0,5,False,2.925991950003663
+P5067.jpg,flux,Flux,True,0.25,1.0,4,False,2.737266774987802
+P1906.jpg,Dexter,Dexter,True,0.0,0.0,4,False,2.737266774987802
+P4975.jpg,renova,renova,True,0.0,0.0,4,False,2.737266774987802
+P2351.jpg,Esprazo,Eropram,False,0.5714285714285714,1.0,5,False,2.737266774987802
+P2302.jpg,Rephaston,replanton,False,0.3333333333333333,1.0,4,False,3.148500349983806
+P2731.jpg,Flamex,Flemex,False,0.16666666666666666,1.0,5,False,3.148500349983806
+P3121.jpg,Thyrox,Thyrox,True,0.0,0.0,5,False,3.148500349983806
+P4310.jpg,Cotson,Cotoren,False,0.5,1.0,5,False,3.148500349983806
+P5366.jpg,ceevit,ceevit,True,0.0,0.0,5,False,3.1271172749984544
+P1910.jpg,Biscor 5,Biscor 5,True,0.0,0.0,6,False,3.1271172749984544
+P3837.jpg,Calbo D,Calbo D,True,0.0,0.0,5,False,3.1271172749984544
+P3756.jpg,Algin,Algin,True,0.0,0.0,4,False,3.1271172749984544
+P2903.jpg,Neuro-B,Neuro-B,True,0.0,0.0,6,False,3.8710435499961022
+P4354.jpg,Ansulin,Insulin,False,0.14285714285714285,1.0,4,False,3.8710435499961022
+P1973.jpg,Xinc,xinc,True,0.25,1.0,4,False,3.8710435499961022
+P2117.jpg,Doximev,Doxlav,False,0.42857142857142855,1.0,5,False,3.8710435499961022
+P4620.jpg,protein,protein,True,0.0,0.0,3,False,2.832395400007954
+P2759.jpg,Rolac,Rolac,True,0.0,0.0,5,False,2.832395400007954
+P5114.jpg,kinate,Kinate,True,0.16666666666666666,1.0,4,False,2.832395400007954
+P2337.jpg,Beklo,Beko,False,0.2,1.0,5,False,2.832395400007954
+P4056.jpg,Injection,Injection,True,0.0,0.0,4,False,4.518526025000028
+P4086.jpg,Alrin,Ator,False,0.8,1.0,4,False,4.518526025000028
+P4902.jpg,nalbun 2,nalbun 2,True,0.0,0.0,7,False,4.518526025000028
+P1273.jpg,Zymetpro,Zymef Pro,False,0.375,2.0,6,False,4.518526025000028
+P2962.jpg,Neuro-B,Neuro-B,True,0.0,0.0,6,False,3.6035451749921776
+P5575.jpg,esmax,Esmax,True,0.2,1.0,5,False,3.6035451749921776
+P3467.jpg,Omeprazole,Omrazole,False,0.2,1.0,6,False,3.6035451749921776
+P4928.jpg,mefanide,Metenid,False,0.5,1.0,5,False,3.6035451749921776
+P3631.jpg,Injection,Injection,True,0.0,0.0,4,False,2.8073802750150207
+P3738.jpg,Histacin,Histacin,True,0.0,0.0,5,False,2.8073802750150207
+P1414.jpg,Alfane,Alfane,True,0.0,0.0,5,False,2.8073802750150207
+P4073.jpg,Tablet,Tablet,True,0.0,0.0,4,False,2.8073802750150207
+P1139.jpg,Dexter,Dexter,True,0.0,0.0,4,False,2.770868949999567
+P4374.jpg,Tablet,Tablet,True,0.0,0.0,4,False,2.770868949999567
+P4454.jpg,Sedil,Sce,False,0.8,1.0,4,False,2.770868949999567
+P3310.jpg,Emistat,Emistat,True,0.0,0.0,5,False,2.770868949999567
+P4239.jpg,Capsule,Capsule,True,0.0,0.0,5,False,3.2168839249934535
+P4519.jpg,cetaclav,Cefaclav,False,0.25,1.0,6,False,3.2168839249934535
+P1700.jpg,Don A,don A,True,0.2,0.5,4,False,3.2168839249934535
+P4793.jpg,clindacin,clindacin,True,0.0,0.0,6,False,3.2168839249934535
+P2177.jpg,Bilfast,Bilfast,True,0.0,0.0,5,False,12.63478485000087
+P2218.jpg,Esprazo,Esprazo,True,0.0,0.0,6,False,12.63478485000087
+P4070.jpg,Tablet,Tablet,True,0.0,0.0,4,False,12.63478485000087
+P2836.jpg,Ocef,Oceof,False,0.25,1.0,5,False,12.63478485000087
+P4619.jpg,diet,Diet,True,0.25,1.0,4,False,4.454295100003947
+P3302.jpg,Voltalin,voltalin,True,0.125,1.0,4,False,4.454295100003947
+P4889.jpg,budicort,Bamicort,False,0.375,1.0,5,False,4.454295100003947
+P1613.jpg,Cap. ESONEX,Cup. Foral,False,0.6363636363636364,1.0,7,False,4.454295100003947
+P2613.jpg,Festam gel,Feben gel,False,0.4,0.5,5,False,3.2161100499797612
+P1434.jpg,Velcal,relcalcal,False,0.6666666666666666,1.0,6,False,3.2161100499797612
+P2688.jpg,Flux,flux,True,0.25,1.0,4,False,3.2161100499797612
+P3705.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.2161100499797612
+P1545.jpg,Dexter 60,Dexter 60,True,0.0,0.0,5,False,3.8684080750099383
+P2115.jpg,Rosetn,Refr,False,0.6666666666666666,1.0,5,False,3.8684080750099383
+P1847.jpg,Prindof,Prilof,False,0.2857142857142857,1.0,5,False,3.8684080750099383
+P3707.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.8684080750099383
+P1267.jpg,Neuvoxew,Neuroxen,False,0.25,1.0,6,False,3.422185349976644
+P2996.jpg,Barbit,Borit,False,0.3333333333333333,1.0,5,False,3.422185349976644
+P3455.jpg,Omidon,omidon,True,0.16666666666666666,1.0,4,False,3.422185349976644
+P1654.jpg,Acliz Plus,Aelipin,False,0.7,1.0,6,False,3.422185349976644
+P1850.jpg,Don A,Donter,False,0.6,1.0,4,False,2.9514210000052117
+P3801.jpg,ERP,CRP,False,0.3333333333333333,1.0,4,False,2.9514210000052117
+P4913.jpg,voltalin,voltalin,True,0.0,0.0,4,False,2.9514210000052117
+P3762.jpg,CRP,CRP,True,0.0,0.0,4,False,2.9514210000052117
+P2763.jpg,Quiet,Revel,False,0.8,1.0,4,False,3.1019933999923524
+P4050.jpg,Brain.V,BecadinV,False,0.5714285714285714,1.0,5,False,3.1019933999923524
+P3638.jpg,Algin,Algin,True,0.0,0.0,4,False,3.1019933999923524
+P1834.jpg,Algin,Algin,True,0.0,0.0,4,False,3.1019933999923524
+P1742.jpg,Eggcal,Easal,False,0.5,1.0,5,False,2.9753395000007004
+P5357.jpg,texit,texit,True,0.0,0.0,4,False,2.9753395000007004
+P5313.jpg,myolax,Myolax,True,0.16666666666666666,1.0,5,False,2.9753395000007004
+P2601.jpg,Azinil,Azil,False,0.3333333333333333,1.0,4,False,2.9753395000007004
+P2343.jpg,Napa one,Napa One,True,0.125,0.5,5,False,3.7869990749750286
+P4368.jpg,Roxadex,Radex,False,0.2857142857142857,1.0,5,False,3.7869990749750286
+P3297.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.7869990749750286
+P2112.jpg,voltalin,voltalin,True,0.0,0.0,4,False,3.7869990749750286
+P1431.jpg,Biscor 5,Basor,False,0.5,1.0,5,False,3.270887799997581
+P1403.jpg,Tab. ANADOL,Tab. Ao,False,0.45454545454545453,0.5,6,False,3.270887799997581
+P3280.jpg,Anadol,Anadol,True,0.0,0.0,5,False,3.270887799997581
+P3514.jpg,Napa,Napa,True,0.0,0.0,4,False,3.270887799997581
+P3805.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.7821521750011016
+P2338.jpg,Calboral D,Calboral D,True,0.0,0.0,6,False,3.7821521750011016
+P2190.jpg,Fexo,Fexo,True,0.0,0.0,5,False,3.7821521750011016
+P5115.jpg,nerrion,Nervion,False,0.2857142857142857,1.0,5,False,3.7821521750011016
+P3536.jpg,Nalbun - 2,nalbun 2,False,0.3,0.6666666666666666,7,False,4.524538750003558
+P5079.jpg,alcet,Alcet,True,0.2,1.0,5,False,4.524538750003558
+P2844.jpg,Garcon,Geon,False,0.5,1.0,4,False,4.524538750003558
+P3611.jpg,Napa,Napa,True,0.0,0.0,4,False,4.524538750003558
+P1573.jpg,Neuroxen,Neuven,False,0.375,1.0,5,False,2.848022124991985
+P3792.jpg,Injection,Injection,True,0.0,0.0,4,False,2.848022124991985
+P2126.jpg,Clavutil,Clavutil,True,0.0,0.0,5,False,2.848022124991985
+P4204.jpg,Xinc B,xinc b,True,0.3333333333333333,1.0,5,False,2.848022124991985
+P2110.jpg,Lactomone,lactomore,False,0.2222222222222222,1.0,5,False,3.266168775007827
+P3704.jpg,Flugal,Flugal,True,0.0,0.0,4,False,3.266168775007827
+P4809.jpg,liberts,liberts,True,0.0,0.0,4,False,3.266168775007827
+P2244.jpg,Xyflo,Xyllo,False,0.2,1.0,5,False,3.266168775007827
+P5394.jpg,flamyd,Flamyd,True,0.16666666666666666,1.0,5,False,4.5072072749899235
+P2855.jpg,Triolon,Turo,False,0.7142857142857143,1.0,4,False,4.5072072749899235
+P1167.jpg,Glymfa,Clya,False,0.5,1.0,5,False,4.5072072749899235
+P5351.jpg,alafix,alafafafx,False,0.6666666666666666,1.0,7,False,4.5072072749899235
+P3400.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.6048695249774028
+P2031.jpg,Eslilex,Eslilex,True,0.0,0.0,6,False,3.6048695249774028
+P2235.jpg,Norestin,Norestin,True,0.0,0.0,5,False,3.6048695249774028
+P4691.jpg,inj,Injection,False,2.3333333333333335,1.0,4,False,3.6048695249774028
+P5052.jpg,texit,texit,True,0.0,0.0,4,False,2.7853403750050347
+P4052.jpg,Syrup,Syrup,True,0.0,0.0,4,False,2.7853403750050347
+P3604.jpg,Diet,Diet,True,0.0,0.0,4,False,2.7853403750050347
+P2916.jpg,Flugal,Fugal,False,0.16666666666666666,1.0,4,False,2.7853403750050347
+P4427.jpg,Montelukast,montelukf,False,0.36363636363636365,1.0,6,False,7.044318225001916
+P2023.jpg,Rosuva,Rosva,False,0.16666666666666666,1.0,4,False,7.044318225001916
+P4940.jpg,xinc b,xinc b,True,0.0,0.0,5,False,7.044318225001916
+P2564.jpg,Fylox,Fylox,True,0.0,0.0,5,False,7.044318225001916
+P3794.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,4.325794350006618
+P4059.jpg,Tablet,Tablet,True,0.0,0.0,4,False,4.325794350006618
+P2053.jpg,Pro Gio,Protio,False,0.2857142857142857,1.0,4,False,4.325794350006618
+P2408.jpg,Clavutil,Clavutil,True,0.0,0.0,5,False,4.325794350006618
+P2604.jpg,Comprid,Coprilidididididididididididididididididididid,False,5.857142857142857,1.0,24,True,12.09801597497426
+P2280.jpg,Nexum,Nexum,True,0.0,0.0,5,False,12.09801597497426
+P5518.jpg,liquid,liquid,True,0.0,0.0,3,False,12.09801597497426
+P5176.jpg,fexocon,Fexolon,False,0.2857142857142857,1.0,5,False,12.09801597497426
+P1248.jpg,Don-A,dona,False,0.6,1.0,4,False,3.234187825000845
+P3558.jpg,Fluclox,Fluclox,True,0.0,0.0,6,False,3.234187825000845
+P2191.jpg,Rolae,Rolac,False,0.2,1.0,5,False,3.234187825000845
+P3108.jpg,Heranor,Hecor,False,0.42857142857142855,1.0,5,False,3.234187825000845
+P5250.jpg,esmax,Esmax,True,0.2,1.0,5,False,2.8348452250065748
+P5119.jpg,emixef,Eoxel,False,0.6666666666666666,1.0,5,False,2.8348452250065748
+P4201.jpg,Tablet,Tablet,True,0.0,0.0,4,False,2.8348452250065748
+P3633.jpg,Injection,Injection,True,0.0,0.0,4,False,2.8348452250065748
+P3804.jpg,Vancomycin,Vancomcomcein,False,0.4,1.0,7,False,3.6683961000235286
+P3802.jpg,Injection,Injection,True,0.0,0.0,4,False,3.6683961000235286
+P2467.jpg,Trevox,Trevox,True,0.0,0.0,5,False,3.6683961000235286
+P2659.jpg,Rolac,Rolac,True,0.0,0.0,5,False,3.6683961000235286
+P2438.jpg,Napa one,Napa One,True,0.125,0.5,5,False,3.7826309999800287
+P1315.jpg,Tab. Neuro,Tab.Neo,False,0.3,1.0,6,False,3.7826309999800287
+P1250.jpg,Dophyllin,Dophylin,False,0.1111111111111111,1.0,5,False,3.7826309999800287
+P4744.jpg,megaba,Megaba,True,0.16666666666666666,1.0,5,False,3.7826309999800287
+P2650.jpg,Filofer,Filofer,True,0.0,0.0,4,False,12.774976225016871
+P3239.jpg,Omep,Omep,True,0.0,0.0,5,False,12.774976225016871
+P2842.jpg,Esprozo,Esprazo,False,0.14285714285714285,1.0,6,False,12.774976225016871
+P1133.jpg,Melhomofsw,Metronin,False,0.7,1.0,5,False,12.774976225016871
+P5462.jpg,voxbone,voxbone,True,0.0,0.0,5,False,3.9491241500072647
+P2848.jpg,Filmet,filmet,True,0.16666666666666666,1.0,4,False,3.9491241500072647
+P3217.jpg,Maxpro,Maxpro,True,0.0,0.0,4,False,3.9491241500072647
+P2303.jpg,Ferti-Q,Fexin,False,0.5714285714285714,1.0,5,False,3.9491241500072647
+P3120.jpg,Monas,Monas,True,0.0,0.0,4,False,3.8100561249884777
+P1926.jpg,pregmo,fluoral,False,1.1666666666666667,1.0,4,False,3.8100561249884777
+P4143.jpg,Maxima,Maxima,True,0.0,0.0,4,False,3.8100561249884777
+P3483.jpg,Nalbun - 2,nalbun 2,False,0.3,0.6666666666666666,7,False,3.8100561249884777
+P5515.jpg,voltalin,voltalin,True,0.0,0.0,4,False,5.176546900009271
+P2977.jpg,Bilista,Bilista,True,0.0,0.0,5,False,5.176546900009271
+P4712.jpg,p/c,p/c,True,0.0,0.0,5,False,5.176546900009271
+P5550.jpg,alafix,alafafafafo,False,1.1666666666666667,1.0,8,False,5.176546900009271
+P2148.jpg,Reserux-SR,Reuro-S,False,0.5,1.0,6,False,3.212525500013726
+P3931.jpg,Voltalin,voltalin,True,0.125,1.0,4,False,3.212525500013726
+P2893.jpg,Normens,Normens,True,0.0,0.0,4,False,3.212525500013726
+P1949.jpg,Cildip 5,Cildip 5,True,0.0,0.0,6,False,3.212525500013726
+P3493.jpg,Emistat,emistat,True,0.14285714285714285,1.0,5,False,3.8387387999973726
+P1584.jpg,Neuroxen,Neurox,False,0.25,1.0,5,False,3.8387387999973726
+P3576.jpg,Emistat,emolal,False,0.7142857142857143,1.0,5,False,3.8387387999973726
+P4727.jpg,ceevit,Ceef,False,0.6666666666666666,1.0,5,False,3.8387387999973726
+P1671.jpg,Devixil,Devil,False,0.2857142857142857,1.0,4,False,3.543310425011441
+P3721.jpg,Injection,Injection,True,0.0,0.0,4,False,3.543310425011441
+P2571.jpg,Vonacab,Vonocab,False,0.14285714285714285,1.0,6,False,3.543310425011441
+P1796.jpg,Neuroxen,Neuroxen,True,0.0,0.0,6,False,3.543310425011441
+P5266.jpg,voltalin,voltalin,True,0.0,0.0,4,False,2.9983437249902636
+P2620.jpg,X-fen,Xfen,False,0.2,1.0,4,False,2.9983437249902636
+P3204.jpg,Indever,Indav,False,0.42857142857142855,1.0,4,False,2.9983437249902636
+P2614.jpg,Ace Power,A power,False,0.3333333333333333,1.0,4,False,2.9983437249902636
+P3834.jpg,Syrup,Syrup,True,0.0,0.0,4,False,2.8273967250133865
+P4732.jpg,kacin,Kacin,True,0.2,1.0,5,False,2.8273967250133865
+P2704.jpg,Fexit,texit,False,0.2,1.0,4,False,2.8273967250133865
+P2768.jpg,Alect,Alcef,False,0.6,1.0,5,False,2.8273967250133865
+P4112.jpg,Monas,Monas,True,0.0,0.0,4,False,2.358046524983365
+P4434.jpg,Normal,Noral,False,0.16666666666666666,1.0,4,False,2.358046524983365
+P5424.jpg,torax,torax,True,0.0,0.0,4,False,2.358046524983365
+P1899.jpg,Rosu,Rosu,True,0.0,0.0,4,False,2.358046524983365
+P1368.jpg,Tab. Amitip 10,Tab. Anthip 10,False,0.21428571428571427,0.3333333333333333,7,False,5.30725582499872
+P3894.jpg,Tablet,Tablet,True,0.0,0.0,4,False,5.30725582499872
+P1209.jpg,Sperm Core,Serm Core,False,0.1,0.5,5,False,5.30725582499872
+P2294.jpg,Furocef,Furocef,True,0.0,0.0,6,False,5.30725582499872
+P3413.jpg,V-plex,Vypac,False,0.6666666666666666,1.0,5,False,3.6338249999971595
+P4634.jpg,nalbun 2,nalbun 2,True,0.0,0.0,7,False,3.6338249999971595
+P2265.jpg,Nexum,Nexum,True,0.0,0.0,5,False,3.6338249999971595
+P2388.jpg,Xiva,Xiva,True,0.0,0.0,4,False,3.6338249999971595
+P1424.jpg,Feursilal,Sasal,False,0.6666666666666666,1.0,5,False,2.8705054500023834
+P4211.jpg,Napa,Napa,True,0.0,0.0,4,False,2.8705054500023834
+P5326.jpg,toxit,texit,False,0.2,1.0,4,False,2.8705054500023834
+P4130.jpg,Napa,Napa,True,0.0,0.0,4,False,2.8705054500023834
+P3712.jpg,Capsule,Capsule,True,0.0,0.0,5,False,3.7746401999902446
+P1149.jpg,Tesfro max,Tecor max,False,0.3,0.5,6,False,3.7746401999902446
+P3301.jpg,Fexo,Fexo,True,0.0,0.0,5,False,3.7746401999902446
+P4916.jpg,nalbun 2,nalbun 2,True,0.0,0.0,7,False,3.7746401999902446
+P1503.jpg,Calboral Dx,Calboral Dx,True,0.0,0.0,7,False,3.664412749989424
+P1225.jpg,Paloxi,Paloxi,True,0.0,0.0,5,False,3.664412749989424
+P2439.jpg,Fixgut 10,Fixat 10,False,0.2222222222222222,0.5,5,False,3.664412749989424
+P4747.jpg,flamex,Flamex,True,0.16666666666666666,1.0,5,False,3.664412749989424
+P1295.jpg,Derolon,Desolon,False,0.14285714285714285,1.0,4,False,2.783557149989065
+P3089.jpg,Naprox Plus,Naprox plus,True,0.09090909090909091,0.5,5,False,2.783557149989065
+P5014.jpg,amdocal,amdocal,True,0.0,0.0,4,False,2.783557149989065
+P2425.jpg,Ligazid,liquid,False,0.5714285714285714,1.0,3,False,2.783557149989065
+P1587.jpg,viglimef,viginef,False,0.25,1.0,6,False,4.2284039499936625
+P3367.jpg,Ceftriaxone,Ceftriaxone,True,0.0,0.0,8,False,4.2284039499936625
+P4515.jpg,cap,Capsule,False,1.6666666666666667,1.0,5,False,4.2284039499936625
+P4996.jpg,diet,Diet,True,0.25,1.0,4,False,4.2284039499936625
+P4735.jpg,renova,renova,True,0.0,0.0,4,False,3.390096099989023
+P1667.jpg,Montene,montene,True,0.14285714285714285,1.0,4,False,3.390096099989023
+P1236.jpg,roswva 5,Rosva 5,False,0.25,0.5,5,False,3.390096099989023
+P2189.jpg,Voligel.Max,volgex,False,0.5454545454545454,1.0,6,False,3.390096099989023
+P1602.jpg,Eslilex,Eslilex,True,0.0,0.0,6,False,3.19266847500694
+P3477.jpg,Injection,Injection,True,0.0,0.0,4,False,3.19266847500694
+P2537.jpg,Texit,texit,True,0.2,1.0,4,False,3.19266847500694
+P4315.jpg,Paracetamol,Paracetenol,False,0.18181818181818182,1.0,6,False,3.19266847500694
+P1916.jpg,Nonum,Norium,False,0.4,1.0,4,False,4.064328025007853
+P1532.jpg,Tryptin Plus,Tophyin Plus,False,0.3333333333333333,0.5,6,False,4.064328025007853
+P1559.jpg,m-lucas 10,m-lucas 10,True,0.0,0.0,8,False,4.064328025007853
+P2328.jpg,Neuro-B,Neuro-B,True,0.0,0.0,6,False,4.064328025007853
+P3264.jpg,Anlin,Amlin,False,0.2,1.0,5,False,3.563521700009005
+P1784.jpg,m-lucas,m-lucas,True,0.0,0.0,7,False,3.563521700009005
+P5192.jpg,premac,premac,True,0.0,0.0,4,False,3.563521700009005
+P2450.jpg,Fixgut,Fixgal,False,0.3333333333333333,1.0,5,False,3.563521700009005
+P2373.jpg,Nexe mups,Nexens,False,0.4444444444444444,1.0,5,False,3.7030404249962885
+P4830.jpg,histal,Histal,True,0.16666666666666666,1.0,4,False,3.7030404249962885
+P1621.jpg,Calboral Dx,Calboral Dx,True,0.0,0.0,7,False,3.7030404249962885
+P3548.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.7030404249962885
+P3427.jpg,Anadol,Anadol,True,0.0,0.0,5,False,3.630257349985186
+P1921.jpg,microges,Micressf,False,0.625,1.0,5,False,3.630257349985186
+P3908.jpg,Rolac,Rolac,True,0.0,0.0,5,False,3.630257349985186
+P1945.jpg,Revocit,reocit,False,0.2857142857142857,1.0,5,False,3.630257349985186
+P4528.jpg,Fexofast,Fexofr,False,0.375,1.0,6,False,5.331104474986205
+P1260.jpg,xyrl 10,xyr 10,False,0.14285714285714285,0.5,5,False,5.331104474986205
+P2141.jpg,Nexum-mups,Nexum- Mups,False,0.2,2.0,8,False,5.331104474986205
+P1291.jpg,Devixil,Devil,False,0.2857142857142857,1.0,4,False,5.331104474986205
+P2353.jpg,Liquid to soft,Neidooooooooooooooooooooo,False,1.5714285714285714,1.0,24,True,12.6415144999919
+P4033.jpg,Tablet,Tablet,True,0.0,0.0,4,False,12.6415144999919
+P1958.jpg,Terbi max,Tablet max,False,0.5555555555555556,0.5,5,False,12.6415144999919
+P3437.jpg,Napa,Napa,True,0.0,0.0,4,False,12.6415144999919
+P1161.jpg,uriset,Urisf,False,0.5,1.0,5,False,3.8774439750122838
+P3334.jpg,Hastaol,Histal,False,0.2857142857142857,1.0,4,False,3.8774439750122838
+P1390.jpg,Tab. Esotid,Tb. cid,False,0.45454545454545453,1.0,7,False,3.8774439750122838
+P2730.jpg,Nexe,nexe,True,0.25,1.0,4,False,3.8774439750122838
+P2583.jpg,Rolac,Rolac,True,0.0,0.0,5,False,3.112031274999026
+P2289.jpg,Omidon,omidon,True,0.16666666666666666,1.0,4,False,3.112031274999026
+P4685.jpg,budicort,budicor,False,0.125,1.0,5,False,3.112031274999026
+P1914.jpg,Callin,Calcorin,False,0.5,1.0,5,False,3.112031274999026
+P3360.jpg,Napa,Napa,True,0.0,0.0,4,False,3.7539847750158515
+P4428.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.7539847750158515
+P4340.jpg,Diabetic,Diabetic,True,0.0,0.0,4,False,3.7539847750158515
+P5211.jpg,roxadex,Roxadex,True,0.14285714285714285,1.0,6,False,3.7539847750158515
+P3951.jpg,Paracetamol,Paracetamol,True,0.0,0.0,6,False,4.027262149989838
+P1807.jpg,mefhomof,Rechnof,False,0.5,1.0,5,False,4.027262149989838
+P1737.jpg,Cheort-Dx,Tabaal-Dx,False,0.6666666666666666,1.0,8,False,4.027262149989838
+P1265.jpg,Biscor,Biscor,True,0.0,0.0,5,False,4.027262149989838
+P1554.jpg,Neuroxen,Neuroxen,True,0.0,0.0,6,False,3.44500942499144
+P4466.jpg,telcard,Telecardo,False,0.42857142857142855,1.0,5,False,3.44500942499144
+P3270.jpg,Xinc B,xinc b,True,0.3333333333333333,1.0,5,False,3.44500942499144
+P4550.jpg,arlin,Amlin,False,0.4,1.0,5,False,3.44500942499144
+P2160.jpg,Supra-B,SuprazB,False,0.14285714285714285,1.0,6,False,3.6263167500146665
+P5526.jpg,voltalin,voltalin,True,0.0,0.0,4,False,3.6263167500146665
+P4136.jpg,Normal,Normal,True,0.0,0.0,3,False,3.6263167500146665
+P2909.jpg,Neuro-B,Neuro-B,True,0.0,0.0,6,False,3.6263167500146665
+P4281.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.2979783749906346
+P2278.jpg,Ceevit,Ceef,False,0.5,1.0,5,False,3.2979783749906346
+P1530.jpg,Algin,Algin,True,0.0,0.0,4,False,3.2979783749906346
+P1412.jpg,cefotil plus,Ctoft plus,False,0.5,0.5,6,False,3.2979783749906346
+P5481.jpg,nexe,nexe,True,0.0,0.0,4,False,3.210532700002659
+P2726.jpg,Frulac,Frulac,True,0.0,0.0,5,False,3.210532700002659
+P1438.jpg,Tab. Maxpro,cap Maxin,False,0.5454545454545454,1.0,5,False,3.210532700002659
+P4297.jpg,Kefuclav,Kefullav,False,0.125,1.0,6,False,3.210532700002659
+P2279.jpg,Algin,Algin,True,0.0,0.0,4,False,2.7983795999898575
+P5269.jpg,liquid,liquid,True,0.0,0.0,3,False,2.7983795999898575
+P1135.jpg,Don A,dona,False,0.6,1.0,4,False,2.7983795999898575
+P4093.jpg,Tablet,Tablet,True,0.0,0.0,4,False,2.7983795999898575
+P3686.jpg,Meropenem,Meropen,False,0.2222222222222222,1.0,4,False,13.17577547498513
+P4792.jpg,ceftazidime,Cefazidololidididolididolididolidolidolidolid,False,3.5454545454545454,1.0,24,True,13.17577547498513
+P4826.jpg,nalbun-1,nalbun-1,True,0.0,0.0,8,False,13.17577547498513
+P2316.jpg,Calcor-D,Calbo-D,False,0.25,1.0,6,False,13.17577547498513
+P5296.jpg,apuldon,Apelin,False,0.5714285714285714,1.0,5,False,12.858164675009903
+P1718.jpg,cap. Esprazo,cap. Ep Epo,False,0.3333333333333333,1.0,7,False,12.858164675009903
+P3372.jpg,Anadol,Aradol,False,0.16666666666666666,1.0,5,False,12.858164675009903
+P4922.jpg,ceevit,ceevit,True,0.0,0.0,5,False,12.858164675009903
+P2788.jpg,Remmo,Remmo,True,0.0,0.0,4,False,5.459757475007791
+P3341.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,5.459757475007791
+P1406.jpg,Tab. CEEVIX,Bbbbb. cav,False,0.9090909090909091,1.0,10,False,5.459757475007791
+P3007.jpg,Frulac,fuclac,False,0.5,1.0,5,False,5.459757475007791
+P1677.jpg,Algin,Algin,True,0.0,0.0,4,False,2.832650399999693
+P1186.jpg,Arlila,Arca,False,0.5,1.0,5,False,2.832650399999693
+P5411.jpg,supp,Suppository,False,2.0,1.0,4,False,2.832650399999693
+P3461.jpg,Algin,Algin,True,0.0,0.0,4,False,2.832650399999693
+P2529.jpg,Nexum,Nexum,True,0.0,0.0,5,False,3.2778068500047084
+P4366.jpg,Ceftriaxone,Cefaxone,False,0.2727272727272727,1.0,6,False,3.2778068500047084
+P1531.jpg,Biscor 5,Biscor,False,0.25,0.5,5,False,3.2778068500047084
+P5514.jpg,ceevit,ceevit,True,0.0,0.0,5,False,3.2778068500047084
+P4616.jpg,xinc b,xinc b,True,0.0,0.0,5,False,3.414782900013961
+P3189.jpg,Aropen,Aropen,True,0.0,0.0,5,False,3.414782900013961
+P3763.jpg,Blood,blcod,False,0.4,1.0,5,False,3.414782900013961
+P5199.jpg,nexe mups,nexe mups,True,0.0,0.0,6,False,3.414782900013961
+P1177.jpg,Escilex,Eslax 5,False,0.7142857142857143,2.0,6,False,3.26256467498024
+P5559.jpg,gasnil,gasil,False,0.16666666666666666,1.0,5,False,3.26256467498024
+P2577.jpg,Sanbin,Sexbum,False,0.6666666666666666,1.0,5,False,3.26256467498024
+P3692.jpg,Normal,Normal,True,0.0,0.0,3,False,3.26256467498024
+P1821.jpg,Nufw,Napa,False,0.75,1.0,4,False,3.292886674986221
+P5576.jpg,texit,texit,True,0.0,0.0,4,False,3.292886674986221
+P5023.jpg,nexe mups,Nexe Mups,True,0.2222222222222222,1.0,6,False,3.292886674986221
+P2931.jpg,Rebe,Rebe,True,0.0,0.0,4,False,3.292886674986221
+P5498.jpg,nexe,nexe,True,0.0,0.0,4,False,3.450996825005859
+P4506.jpg,lindac,Lindac,True,0.16666666666666666,1.0,4,False,3.450996825005859
+P3083.jpg,Calcor-D,Calcor-D,True,0.0,0.0,6,False,3.450996825005859
+P4659.jpg,xinc b,xinc b,True,0.0,0.0,5,False,3.450996825005859
+P2567.jpg,Dexnaof,Dexaf,False,0.2857142857142857,1.0,5,False,3.5555053499992937
+P4618.jpg,histacin,Histacin,True,0.125,1.0,5,False,3.5555053499992937
+P2158.jpg,Pain at calf,Pratcef,False,0.5833333333333334,1.0,6,False,3.5555053499992937
+P3522.jpg,Meropen,Meropen,True,0.0,0.0,4,False,3.5555053499992937
+P4886.jpg,histacin,Histacin,True,0.125,1.0,5,False,3.551144500001101
+P1646.jpg,Derolon,Dexolon,False,0.14285714285714285,1.0,4,False,3.551144500001101
+P4013.jpg,Voltalin,voltalin,True,0.125,1.0,4,False,3.551144500001101
+P1312.jpg,Tab. Calboral,Tab. caloraloral,False,0.38461538461538464,0.5,7,False,3.551144500001101
+P2377.jpg,Tonlino,Emlino,False,0.42857142857142855,1.0,6,False,3.1744646499864757
+P4926.jpg,windel plus,windel plus,True,0.0,0.0,5,False,3.1744646499864757
+P1758.jpg,Devixil,Devil,False,0.2857142857142857,1.0,4,False,3.1744646499864757
+P3444.jpg,Diet,Diet,True,0.0,0.0,4,False,3.1744646499864757
+P1871.jpg,verqon,Vorgon,False,0.5,1.0,5,False,2.9423462499980815
+P3568.jpg,Injection,Injection,True,0.0,0.0,4,False,2.9423462499980815
+P2592.jpg,Nexe,Nexe,True,0.0,0.0,4,False,2.9423462499980815
+P4787.jpg,xinc b,xinc,False,0.3333333333333333,0.5,4,False,2.9423462499980815
+P3531.jpg,Vasco,vasco,True,0.2,1.0,4,False,2.8392797249834985
+P2163.jpg,Synogen,Sinogen,False,0.14285714285714285,1.0,5,False,2.8392797249834985
+P3215.jpg,Rolac,Rolac,True,0.0,0.0,5,False,2.8392797249834985
+P1212.jpg,Endurex,Endurex,True,0.0,0.0,5,False,2.8392797249834985
+P1255.jpg,Suzyme,Supone,False,0.5,1.0,5,False,3.2252463000186253
+P4034.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.2252463000186253
+P3731.jpg,Syrup,Syrup,True,0.0,0.0,4,False,3.2252463000186253
+P4754.jpg,budicort,budicort,True,0.0,0.0,5,False,3.2252463000186253
+P1650.jpg,fzsprazo,Esprazo,False,0.25,1.0,6,False,5.955558375018882
+P1867.jpg,halconl Dx,halcal Dx,False,0.2,0.5,7,False,5.955558375018882
+P3417.jpg,Napa,Napa,True,0.0,0.0,4,False,5.955558375018882
+P1837.jpg,Estes,Estes,True,0.0,0.0,4,False,5.955558375018882
+P3035.jpg,Anitip,Amitip,False,0.16666666666666666,1.0,5,False,2.7256926000118256
+P4128.jpg,Normal,Normal,True,0.0,0.0,3,False,2.7256926000118256
+P4150.jpg,Tablet,Tablet,True,0.0,0.0,4,False,2.7256926000118256
+P2618.jpg,Napa,Napa,True,0.0,0.0,4,False,2.7256926000118256
+P1579.jpg,Dexter,Dexter,True,0.0,0.0,4,False,2.7962718999770004
+P1786.jpg,Detfacf,Detfacf,True,0.0,0.0,5,False,2.7962718999770004
+P1594.jpg,Tendonil,Tendoral,False,0.25,1.0,5,False,2.7962718999770004
+P5338.jpg,Macrobac,Microcef,False,0.5,1.0,5,False,2.7962718999770004
+P4282.jpg,Omep,Omep,True,0.0,0.0,5,False,2.900025499984622
+P2994.jpg,Nexum,Nexum,True,0.0,0.0,5,False,2.900025499984622
+P3447.jpg,Napa,Napa,True,0.0,0.0,4,False,2.900025499984622
+P3434.jpg,Meropenem,Meropen,False,0.2222222222222222,1.0,4,False,2.900025499984622
+P1266.jpg,m-lucas 10,m-lucas 10,True,0.0,0.0,8,False,3.950748000002932
+P3921.jpg,Ceftriaxone,Ceftriaxone,True,0.0,0.0,8,False,3.950748000002932
+P3169.jpg,Rolac,rolac,True,0.2,1.0,4,False,3.950748000002932
+P4384.jpg,Stemetil,Seneril,False,0.375,1.0,5,False,3.950748000002932
+P4025.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.148941024992382
+P4989.jpg,omeprazole,Oeprazole,False,0.2,1.0,6,False,3.148941024992382
+P1319.jpg,Tab. Algin,Tab. Aid,False,0.3,0.5,6,False,3.148941024992382
+P3269.jpg,Napa,Napa,True,0.0,0.0,4,False,3.148941024992382
+P2168.jpg,BRON WASFI,Bron Wash,False,0.7,1.0,4,False,3.497007224999834
+P1355.jpg,Calboral Dx,Calboral Dx,True,0.0,0.0,7,False,3.497007224999834
+P2535.jpg,Pirulin,protein,False,0.7142857142857143,1.0,3,False,3.497007224999834
+P2928.jpg,Zesup,Zesup,True,0.0,0.0,5,False,3.497007224999834
+P4145.jpg,Diet,Diet,True,0.0,0.0,4,False,3.7862052749842405
+P5190.jpg,ornopain,Omoprazin,False,0.625,1.0,7,False,3.7862052749842405
+P4664.jpg,windel plus,windel plus,True,0.0,0.0,5,False,3.7862052749842405
+P3220.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.7862052749842405
+P1492.jpg,Don A,dona,False,0.6,1.0,4,False,2.6944719750026707
+P4719.jpg,hansol,Histsol,False,0.6666666666666666,1.0,4,False,2.6944719750026707
+P2722.jpg,Filmet,Filcef,False,0.3333333333333333,1.0,5,False,2.6944719750026707
+P3973.jpg,Injection,Injection,True,0.0,0.0,4,False,2.6944719750026707
+P3848.jpg,Monas,Monac,False,0.2,1.0,4,False,3.5615268999827094
+P5316.jpg,prechery,Prbery,False,0.5,1.0,4,False,3.5615268999827094
+P4785.jpg,emistat,emistoete,False,0.42857142857142855,1.0,6,False,3.5615268999827094
+P2514.jpg,PG,Rosa,False,2.0,1.0,4,False,3.5615268999827094
+P5525.jpg,lactomore,lactomore,True,0.0,0.0,5,False,3.2132219499908388
+P4538.jpg,inj,Injection,False,2.3333333333333335,1.0,4,False,3.2132219499908388
+P2872.jpg,Arlin,Arlin,True,0.0,0.0,4,False,3.2132219499908388
+P1487.jpg,Lubilex,Lutillex,False,0.2857142857142857,1.0,5,False,3.2132219499908388
+P2742.jpg,Biloxe,bilaxe,False,0.3333333333333333,1.0,4,False,2.365344699996058
+P1809.jpg,vaptam,Vapa,False,0.5,1.0,4,False,2.365344699996058
+P2262.jpg,Montene,montene,True,0.14285714285714285,1.0,4,False,2.365344699996058
+P4823.jpg,meropen,Meropen,True,0.14285714285714285,1.0,4,False,2.365344699996058
+P4275.jpg,Diet,Diet,True,0.0,0.0,4,False,3.166732999990927
+P2486.jpg,Nexe,Nexe,True,0.0,0.0,4,False,3.166732999990927
+P2286.jpg,Microgest,Microcef,False,0.3333333333333333,1.0,5,False,3.166732999990927
+P5086.jpg,domin,Dominin,False,0.6,1.0,4,False,3.166732999990927
+P3750.jpg,Tablet,Tablet,True,0.0,0.0,4,False,4.9142524499911815
+P5342.jpg,esmax,Esmax,True,0.2,1.0,5,False,4.9142524499911815
+P1307.jpg,Tab. Calboral,Tab.coral Coreole,False,0.6153846153846154,1.0,8,False,4.9142524499911815
+P2631.jpg,Maxpro,Maxpro,True,0.0,0.0,4,False,4.9142524499911815
+P2674.jpg,Flux,Flux,True,0.0,0.0,4,False,2.7265412000124343
+P2923.jpg,Montene,montene,True,0.14285714285714285,1.0,4,False,2.7265412000124343
+P5300.jpg,rectinol,Reotril,False,0.625,1.0,5,False,2.7265412000124343
+P4525.jpg,normal,Normal,True,0.16666666666666666,1.0,3,False,2.7265412000124343
+P3813.jpg,Cotrim,Cotin,False,0.3333333333333333,1.0,5,False,2.7693387000181247
+P5083.jpg,vaxitet,vasal,False,0.7142857142857143,1.0,5,False,2.7693387000181247
+P4343.jpg,Flamex,Flamex,True,0.0,0.0,5,False,2.7693387000181247
+P4497.jpg,inj,Injection,False,2.3333333333333335,1.0,4,False,2.7693387000181247
+P4631.jpg,clexane,Claxe,False,0.5714285714285714,1.0,4,False,4.203837350010872
+P4102.jpg,Bizoran,Bizoran,True,0.0,0.0,5,False,4.203837350010872
+P4026.jpg,Levofloxacin,Lecorin,False,0.5833333333333334,1.0,6,False,4.203837350010872
+P2277.jpg,Cetinol forte,Retro Fort Forto,False,0.6923076923076923,1.5,7,False,4.203837350010872
+P1185.jpg,Toramex,Toran,False,0.42857142857142855,1.0,4,False,3.6372079249995295
+P4316.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.6372079249995295
+P3283.jpg,Nalbun-Z,nalbun 2,False,0.375,2.0,7,False,3.6372079249995295
+P3710.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.6372079249995295
+P3694.jpg,Ceftriaxone,Cefuroim,False,0.5454545454545454,1.0,6,False,3.251682724978309
+P5470.jpg,miraba,Micro,False,0.8333333333333334,1.0,3,False,3.251682724978309
+P2358.jpg,Fixgut,Fixgf,False,0.3333333333333333,1.0,5,False,3.251682724978309
+P2167.jpg,Doxicap,Doxicap,True,0.0,0.0,5,False,3.251682724978309
+P1282.jpg,Algin,Algin,True,0.0,0.0,4,False,2.838894974993309
+P5290.jpg,temo,Tableuro,False,1.5,1.0,4,False,2.838894974993309
+P2200.jpg,wfiCore,wfi Core,False,0.14285714285714285,2.0,5,False,2.838894974993309
+P2154.jpg,Synogen,Sinogen,False,0.14285714285714285,1.0,5,False,2.838894974993309
+P2005.jpg,Asynta max,Rosol Max,False,0.7,1.0,5,False,3.332289400015725
+P3073.jpg,Calcor-D,Calcor-D,True,0.0,0.0,6,False,3.332289400015725
+P2839.jpg,Beconal,Becoral,False,0.14285714285714285,1.0,4,False,3.332289400015725
+P3541.jpg,Rolac,Rolac,True,0.0,0.0,5,False,3.332289400015725
+P4441.jpg,Montelukast,Metelukf,False,0.45454545454545453,1.0,6,False,3.1557194250053726
+P4860.jpg,emistat,emistal,False,0.14285714285714285,1.0,5,False,3.1557194250053726
+P3830.jpg,Tablet,Tablet,True,0.0,0.0,4,False,3.1557194250053726
+P3523.jpg,Capsule,Capsule,True,0.0,0.0,5,False,3.1557194250053726
+P2242.jpg,Mecol,mucol,False,0.4,1.0,5,False,4.5881115999945905
+P1196.jpg,Clacef,Clacef,True,0.0,0.0,5,False,4.5881115999945905
+P1407.jpg,Tab. Neobean,Tab.odododo,False,0.5833333333333334,1.0,8,False,4.5881115999945905
+P3983.jpg,Ceftriaxone,Ceftriaxone,True,0.0,0.0,8,False,4.5881115999945905
+P3212.jpg,Fexofast,Fexofr,False,0.375,1.0,6,False,3.3228028749872465
+P2548.jpg,Roclav,roclav,True,0.16666666666666666,1.0,5,False,3.3228028749872465
+P4927.jpg,budicort,budicort,True,0.0,0.0,5,False,3.3228028749872465
+P2681.jpg,Apeclo,Ape 10,False,0.5,2.0,5,False,3.3228028749872465
+P1799.jpg,Dexter,Dexter,True,0.0,0.0,4,False,3.828023674985161
+P1862.jpg,Asynta,Rosota,False,0.6666666666666666,1.0,5,False,3.828023674985161
+P1660.jpg,Neuro-B,Neuro-B,True,0.0,0.0,6,False,3.828023674985161
+P3496.jpg,Omeprazole,Omeprazole,True,0.0,0.0,7,False,3.828023674985161
+P1268.jpg,Mig 2.5,mj 2.5,False,0.42857142857142855,0.5,7,False,4.230443899985403
+P3088.jpg,Esprazo,Bsprazo,False,0.14285714285714285,1.0,6,False,4.230443899985403
+P3040.jpg,Flugal,Fluce,False,0.5,1.0,5,False,4.230443899985403
