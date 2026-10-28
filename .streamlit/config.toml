@@ -6,13 +6,14 @@ textColor = "#19383C"
 font = "sans serif"
 
 [server]
+port = 8503
 headless = true
 enableCORS = true
 enableXsrfProtection = true
 maxUploadSize = 10
 
 [client]
-showErrorDetails = "none"
+showErrorDetails = "stacktrace"
 
 [browser]
 gatherUsageStats = false

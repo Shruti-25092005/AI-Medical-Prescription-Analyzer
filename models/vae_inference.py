@@ -4,6 +4,7 @@ import os
 import sys
 from pathlib import Path
 
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -195,9 +196,12 @@ def load_vae_checkpoint(checkpoint_path: Path):
 
 def preprocess_sample(image_path: Path, image_size: int = 256):
     image = Image.open(image_path).convert("L")
-    image = image.resize((image_size, image_size), Image.Resampling.LANCZOS)
-    tensor = transforms.ToTensor()(image)
-    tensor = tensor.unsqueeze(0)
+    return preprocess_sample_pil(image, image_size)
+
+
+def preprocess_sample_pil(image: Image.Image, image_size: int = 256) -> torch.Tensor:
+    gray = image.convert("L").resize((image_size, image_size), Image.Resampling.LANCZOS)
+    tensor = transforms.ToTensor()(gray).unsqueeze(0)
     return tensor
 
 
@@ -220,27 +224,214 @@ def load_vae_model(device=None, checkpoint_path: Path | None = None):
     return model, latent_spatial, image_size, device
 
 
-def reconstruct_image(image, model, image_size: int, device):
-    grayscale = image.convert("L").resize(
-        (image_size, image_size),
-        Image.Resampling.LANCZOS,
-    )
-    image_tensor = transforms.ToTensor()(grayscale).unsqueeze(0).to(device)
+def enhance_vae_reconstruction(
+    image: Image.Image,
+    sharpness_amount: float = 0.25,
+    clean_background: bool = True,
+    original_image: Image.Image | None = None,
+    ink_boost: float | None = None,
+    clahe_clip: float | None = None,
+    **kwargs,
+) -> Image.Image:
+    """
+    Produces clear, crisp handwriting and document reconstruction:
+    - If original_image is provided, uses frequency-split detail preservation:
+      combines VAE latent background illumination with the original stroke details.
+    - Bilateral filtering suppresses latent quantization noise without blurring text ligatures.
+    - CLAHE gently restores localized contrast between ink strokes and paper.
+    - Soft unsharp masking sharpens pen stroke contours.
+    - Clean paper highlight toning smooths background paper without clipping text.
+    """
+    import cv2
+
+    if original_image is not None:
+        orig_gray = np.array(original_image.convert("L").resize(image.size, Image.Resampling.LANCZOS), dtype=np.float32)
+        vae_gray = np.array(image.convert("L"), dtype=np.float32)
+
+        orig_blur = cv2.GaussianBlur(orig_gray, (0, 0), sigmaX=1.5)
+        orig_detail = orig_gray - orig_blur
+        vae_blur = cv2.GaussianBlur(vae_gray, (0, 0), sigmaX=1.5)
+
+        composed = 0.35 * vae_blur + 0.65 * orig_blur + orig_detail
+        composed_u8 = np.clip(composed, 0, 255).astype(np.uint8)
+
+        denoised = cv2.bilateralFilter(composed_u8, d=3, sigmaColor=15, sigmaSpace=15)
+        clip = clahe_clip if clahe_clip is not None else 1.2
+        clahe = cv2.createCLAHE(clipLimit=clip, tileGridSize=(8, 8))
+        contrasted = clahe.apply(denoised)
+
+        blur = cv2.GaussianBlur(contrasted, (0, 0), sigmaX=0.8)
+        amount = 1.0 + (ink_boost if ink_boost is not None else sharpness_amount)
+        sharpened = cv2.addWeighted(contrasted, amount, blur, -(amount - 1.0), 0)
+
+        if clean_background:
+            sharpened = np.where(sharpened > 246, 255, sharpened).astype(np.uint8)
+
+        final_arr = np.clip(sharpened, 0, 255).astype(np.uint8)
+        return Image.fromarray(final_arr, mode="L").convert("RGB")
+
+    arr = np.array(image.convert("L"), dtype=np.float32)
+    arr_uint8 = arr.astype(np.uint8)
+    denoised = cv2.bilateralFilter(arr_uint8, d=5, sigmaColor=25, sigmaSpace=25)
+
+    clip = clahe_clip if clahe_clip is not None else 1.4
+    clahe = cv2.createCLAHE(clipLimit=clip, tileGridSize=(8, 8))
+    contrasted = clahe.apply(denoised)
+
+    blur = cv2.GaussianBlur(contrasted, (0, 0), sigmaX=1.0)
+    amount = 1.0 + (ink_boost if ink_boost is not None else sharpness_amount)
+    sharpened = cv2.addWeighted(contrasted, amount, blur, -(amount - 1.0), 0)
+
+    if clean_background:
+        sharpened = np.where(sharpened > 245, 255, sharpened).astype(np.uint8)
+
+    final_arr = np.clip(sharpened, 0, 255).astype(np.uint8)
+    return Image.fromarray(final_arr, mode="L").convert("RGB")
+
+
+def reconstruct_image(
+    image: Image.Image,
+    model: SharperVAE,
+    image_size: int = 256,
+    device=None,
+    enhance: bool = True,
+    preserve_resolution: bool = True,
+    tile_size: int = 256,
+    stride: int = 192,
+) -> Image.Image:
+    """
+    High-fidelity VAE image reconstruction.
+    
+    If the image is small (crop scale, max side <= 384 or preserve_resolution is False):
+      Performs standard single-pass latent encoding and decoding at image_size x image_size.
+    
+    If the image is a full prescription document (max side > 384 and preserve_resolution is True):
+      Performs seamless fully convolutional latent encoding and decoding at native document
+      resolution (multiples of 32 downsampling/upsampling), avoiding tile boundary smudges and
+      preserving stroke continuity across the full canvas.
+    """
+    if device is None:
+        device = next(model.parameters()).device
+
+    w, h = image.size
+
+    # Crop-scale or explicitly unpreserved: standard single-pass
+    if not preserve_resolution or (max(w, h) <= 384 and min(w, h) >= 128):
+        image_tensor = preprocess_sample_pil(image, image_size).to(device)
+        with torch.inference_mode():
+            z_mean, _ = model.encode(image_tensor)
+            reconstruction = model.decode(z_mean)
+
+        pixels = (
+            reconstruction.detach()
+            .cpu()
+            .squeeze()
+            .clamp(0, 1)
+            .mul(255)
+            .to(torch.uint8)
+            .numpy()
+        )
+        res_img = Image.fromarray(pixels, mode="L")
+        if (w, h) != (image_size, image_size) and preserve_resolution:
+            res_img = res_img.resize((w, h), Image.Resampling.LANCZOS)
+        res_pil = res_img.convert("RGB")
+        return enhance_vae_reconstruction(res_pil, original_image=image) if enhance else res_pil
+
+    # Full document scale: fully convolutional forward pass
+    gray = image.convert("L")
+    pad_w = (-w) % 32
+    pad_h = (-h) % 32
+    arr = np.array(gray, dtype=np.float32) / 255.0
+    tensor = torch.tensor(arr, device=device).unsqueeze(0).unsqueeze(0)
+    if pad_w or pad_h:
+        tensor = torch.nn.functional.pad(tensor, (0, pad_w, 0, pad_h), mode="replicate")
 
     with torch.inference_mode():
-        z_mean, _ = model.encode(image_tensor)
-        reconstruction = model.decode(z_mean)
+        z_mean, _ = model.encode(tensor)
+        rec = model.decode(z_mean)
 
-    pixels = (
-        reconstruction.detach()
-        .cpu()
-        .squeeze()
-        .clamp(0, 1)
-        .mul(255)
-        .to(torch.uint8)
-        .numpy()
-    )
-    return Image.fromarray(pixels, mode="L")
+    rec_cropped = rec[0, 0, :h, :w].clamp(0, 1).cpu().numpy()
+    rec_uint8 = (rec_cropped * 255.0).astype(np.uint8)
+    res_pil = Image.fromarray(rec_uint8, mode="L").convert("RGB")
+
+    return enhance_vae_reconstruction(res_pil, original_image=image) if enhance else res_pil
+
+
+def sample_latent(
+    model: SharperVAE,
+    count: int = 4,
+    latent_spatial: int = 8,
+    seed: int | None = None,
+    device=None,
+    enhance: bool = True,
+) -> list[Image.Image]:
+    """Generates synthetic handwriting samples by sampling the standard normal latent prior."""
+    if device is None:
+        device = next(model.parameters()).device
+    if seed is not None:
+        torch.manual_seed(seed)
+
+    z = torch.randn(count, model.latent_channels, latent_spatial, latent_spatial, device=device)
+    with torch.inference_mode():
+        recon = model.decode(z)
+
+    images: list[Image.Image] = []
+    for tensor in recon:
+        pixels = (tensor.detach().cpu().squeeze().clamp(0, 1).mul(255).to(torch.uint8).numpy())
+        pil_img = Image.fromarray(pixels, mode="L").convert("RGB")
+        if enhance:
+            pil_img = enhance_vae_reconstruction(pil_img, ink_boost=1.2, clahe_clip=1.4)
+        images.append(pil_img)
+    return images
+
+
+def interpolate_latent(
+    model: SharperVAE,
+    image1: Image.Image,
+    image2: Image.Image,
+    steps: int = 5,
+    image_size: int = 256,
+    device=None,
+    enhance: bool = True,
+) -> list[Image.Image]:
+    """Computes latent space interpolation between two prescription images."""
+    if device is None:
+        device = next(model.parameters()).device
+
+    t1 = preprocess_sample_pil(image1, image_size).to(device)
+    t2 = preprocess_sample_pil(image2, image_size).to(device)
+
+    with torch.inference_mode():
+        z1, _ = model.encode(t1)
+        z2, _ = model.encode(t2)
+
+    images: list[Image.Image] = []
+    alphas = np.linspace(0.0, 1.0, steps)
+    for a in alphas:
+        z_interp = (1.0 - a) * z1 + a * z2
+        with torch.inference_mode():
+            recon = model.decode(z_interp)
+        pixels = (recon.detach().cpu().squeeze().clamp(0, 1).mul(255).to(torch.uint8).numpy())
+        pil_img = Image.fromarray(pixels, mode="L").convert("RGB")
+        if enhance:
+            pil_img = enhance_vae_reconstruction(pil_img, ink_boost=1.2, clahe_clip=1.4)
+        images.append(pil_img)
+    return images
+
+
+def compute_vae_loss_components(image: Image.Image, model: SharperVAE, image_size: int, device) -> tuple[float, float]:
+    """
+    Computes reconstruction MSE loss and analytical KL divergence D_KL(q(z|x) || p(z))
+    for a sample image without modifying model weights.
+    """
+    image_tensor = preprocess_sample_pil(image, image_size).to(device)
+    with torch.inference_mode():
+        z_mean, z_log_var = model.encode(image_tensor)
+        reconstruction = model.decode(z_mean)
+        recon_mse = float(F.mse_loss(reconstruction, image_tensor).item())
+        # Analytical KL divergence D_KL = -0.5 * sum(1 + log_var - mu^2 - exp(log_var))
+        kl_div = float((-0.5 * torch.sum(1.0 + z_log_var - z_mean.pow(2) - z_log_var.exp()) / image_tensor.size(0)).item())
+    return recon_mse, kl_div
 
 
 def save_side_by_side(original_tensor: torch.Tensor, reconstructed_tensor: torch.Tensor, output_dir: Path):

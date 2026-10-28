@@ -1,32 +1,48 @@
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
+import math
 import os
 from pathlib import Path
 import random
+from typing import Any
 
 import numpy as np
 import torch
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
+
+from models.diffusion_inference import render_synthetic_form
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CHECKPOINT_PATH = PROJECT_ROOT / "models" / "synthetic_record_gan.pth"
 IMAGE_SIZE = 128
+OUTPUT_SIZE = 512
 LATENT_DIMENSION = 64
 FEATURES = 16
+CHECKPOINT_FORMAT_VERSION = 6
+GAN_ARCHITECTURE = "dcgan_gray128_synthetic_document_v6"
 SYNTHETIC_OUTPUT_LABEL = (
     "AI-GENERATED SYNTHETIC DATA — NOT A REAL PRESCRIPTION — "
     "NOT FOR MEDICAL USE"
 )
-SYNTHETIC_IMAGE_BANNER = "AI-GENERATED - NOT A PRESCRIPTION"
+SYNTHETIC_IMAGE_BANNER = (
+    "AI-GENERATED - NOT A PRESCRIPTION - NOT FOR MEDICAL USE"
+)
 
 
-@dataclass(frozen=True)
+@dataclass
 class FictionalRecord:
     record_id: str
     content: str
     status: str
+    patient_name: str = "Synthetic Patient"
+    patient_age: int = 40
+    patient_gender: str = "Unspecified"
+    date: str = "2026-10-26"
+    doctor_name: str = "Dr. Medical Staff, MD"
+    doctor_reg: str = "PMC-000000"
+    medicines: list[dict[str, str]] | None = None
 
 
 class Generator(nn.Module):
@@ -48,7 +64,7 @@ class Generator(nn.Module):
             nn.ConvTranspose2d(FEATURES, FEATURES // 2, 4, 2, 1, bias=False),
             nn.BatchNorm2d(FEATURES // 2),
             nn.ReLU(True),
-            nn.ConvTranspose2d(FEATURES // 2, 3, 4, 2, 1, bias=False),
+            nn.ConvTranspose2d(FEATURES // 2, 1, 4, 2, 1, bias=False),
             nn.Tanh(),
         )
 
@@ -60,7 +76,7 @@ class Discriminator(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         self.layers = nn.Sequential(
-            nn.Conv2d(3, FEATURES, 4, 2, 1, bias=False),
+            nn.Conv2d(1, FEATURES, 4, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(FEATURES, FEATURES * 2, 4, 2, 1, bias=False),
             nn.BatchNorm2d(FEATURES * 2),
@@ -81,96 +97,50 @@ class Discriminator(nn.Module):
         return self.layers(image).view(-1)
 
 
-def _make_record(index: int, seed: int = 0) -> FictionalRecord:
-    return FictionalRecord(
-        record_id=f"SYNTHETIC-{(seed + index) % 1_000_000:06d}",
-        content="NO CLINICAL CONTENT",
-        status="NOT A PRESCRIPTION",
-    )
-
-
-def _font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    candidates = [
-        Path("C:/Windows/Fonts/arial.ttf"),
-        Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
-        Path("/Library/Fonts/Arial.ttf"),
-    ]
-    for candidate in candidates:
-        if candidate.is_file():
-            try:
-                return ImageFont.truetype(str(candidate), size=size)
-            except OSError:
-                continue
-    return ImageFont.load_default()
-
-
-def render_record(record: FictionalRecord, size: int = IMAGE_SIZE) -> Image.Image:
-    image = Image.new("RGB", (size, size), color=(250, 248, 238))
+def _add_abstract_strokes(image: Image.Image, seed: int) -> Image.Image:
+    """Add non-linguistic ink-like curves to a blank synthetic form."""
+    rng = random.Random(seed)
+    image = image.copy()
     draw = ImageDraw.Draw(image)
-    margin = max(5, size // 20)
-    ink = (37, 56, 65)
-    muted = (98, 111, 115)
-    title_font = _font(max(8, size // 12))
-    body_font = _font(max(7, size // 16))
-    small_font = _font(max(6, size // 20))
-
-    draw.rounded_rectangle(
-        (2, 2, size - 3, size - 3),
-        radius=max(3, size // 32),
-        outline=(126, 151, 151),
-        width=max(1, size // 64),
-        fill=(255, 254, 249),
-    )
-    draw.text(
-        (margin, margin),
-        "FICTIONAL SYNTHETIC SAMPLE",
-        fill=ink,
-        font=title_font,
-    )
-    draw.line(
-        (margin, margin + size // 6, size - margin, margin + size // 6),
-        fill=(90, 133, 135),
-        width=max(1, size // 64),
-    )
-    fields = [
-        ("SAMPLE ID", record.record_id),
-        ("CONTENT", record.content),
-        ("STATUS", record.status),
-    ]
-    y = margin + size // 5
-    row_height = max(10, size // 9)
-    for label, value in fields:
-        draw.text((margin, y), label, fill=muted, font=small_font)
-        draw.text((margin, y + max(7, size // 28)), value, fill=ink, font=body_font)
-        y += row_height
-
-    banner_top = size - max(15, size // 7)
-    draw.rectangle((0, banner_top, size, size), fill=(153, 39, 45))
-    draw.text(
-        (margin, banner_top + max(2, size // 48)),
-        SYNTHETIC_IMAGE_BANNER,
-        fill=(255, 255, 255),
-        font=small_font,
-    )
+    width, height = image.size
+    ink = rng.randrange(20, 85)
+    stroke_width = max(1, width // 128)
+    for _ in range(rng.randint(2, 5)):
+        left = rng.randint(width // 5, width // 3)
+        right = rng.randint(width * 2 // 3, width * 4 // 5)
+        baseline = rng.randint(height * 2 // 5, height * 4 // 5)
+        amplitude = rng.randint(max(2, height // 100), max(3, height // 35))
+        cycles = rng.uniform(1.0, 2.8)
+        point_count = rng.randint(12, 25)
+        points = []
+        for point in range(point_count):
+            progress = point / (point_count - 1)
+            x = left + progress * (right - left)
+            y = (
+                baseline
+                + np.sin(progress * cycles * 2 * np.pi) * amplitude
+                + rng.uniform(-1.2, 1.2)
+            )
+            points.append((round(x), round(y)))
+        draw.line(points, fill=ink, width=stroke_width, joint="curve")
     return image
 
 
-class SyntheticRecordDataset(Dataset):
+class SyntheticDocumentDataset(Dataset):
     def __init__(self, count: int, seed: int = 42) -> None:
         if count < 2:
-            raise ValueError("Synthetic dataset must contain at least two records.")
-        self.records = [
-            _make_record(index + 1, seed)
-            for index in range(count)
-        ]
+            raise ValueError("Synthetic dataset must contain at least two images.")
+        self.count = count
+        self.seed = seed
 
     def __len__(self) -> int:
-        return len(self.records)
+        return self.count
 
     def __getitem__(self, index: int) -> torch.Tensor:
-        image = render_record(self.records[index])
-        tensor = torch.from_numpy(np.asarray(image, dtype="float32").copy())
-        tensor = tensor.permute(2, 0, 1)
+        image = render_synthetic_form(index, IMAGE_SIZE, self.seed)
+        image = _add_abstract_strokes(image, self.seed + index * 104_729)
+        pixels = np.asarray(image, dtype=np.float32).copy()
+        tensor = torch.from_numpy(pixels).unsqueeze(0)
         return tensor.div(127.5).sub(1)
 
 
@@ -183,11 +153,12 @@ def _initialize_weights(module: nn.Module) -> None:
 
 
 def train_gan(
-    epochs: int = 5,
+    epochs: int = 40,
     record_count: int = 512,
     batch_size: int = 32,
     seed: int = 42,
     progress_callback=None,
+    checkpoint_path: str | Path = CHECKPOINT_PATH,
 ) -> list[dict[str, float]]:
     if epochs < 1:
         raise ValueError("Epoch count must be at least 1.")
@@ -197,10 +168,12 @@ def train_gan(
         raise ValueError("Record count must be at least the batch size.")
 
     torch.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    dataset = SyntheticRecordDataset(record_count, seed)
+    dataset = SyntheticDocumentDataset(record_count, seed)
     loader = DataLoader(
         dataset,
         batch_size=batch_size,
@@ -214,7 +187,7 @@ def train_gan(
     discriminator = Discriminator().to(device)
     generator.apply(_initialize_weights)
     discriminator.apply(_initialize_weights)
-    loss_function = nn.BCEWithLogitsLoss()
+    loss_function = nn.MSELoss()
     generator_optimizer = torch.optim.Adam(
         generator.parameters(),
         lr=0.0002,
@@ -226,13 +199,16 @@ def train_gan(
         betas=(0.5, 0.999),
     )
 
-    history = []
+    history: list[dict[str, float]] = []
     for epoch in range(epochs):
         generator.train()
         discriminator.train()
         generator_loss_total = 0.0
         discriminator_loss_total = 0.0
+        structure_loss_total = 0.0
+        diversity_loss_total = 0.0
         batch_count = 0
+        instance_noise = 0.05 * (1 - epoch / max(epochs - 1, 1))
         for real_images in loader:
             real_images = real_images.to(device, non_blocking=True)
             size = real_images.size(0)
@@ -242,49 +218,143 @@ def train_gan(
             fake_images = generator(noise)
 
             discriminator_optimizer.zero_grad(set_to_none=True)
-            real_loss = loss_function(discriminator(real_images), real_targets)
+            real_input = real_images + torch.randn_like(real_images) * instance_noise
+            fake_input = fake_images.detach() + (
+                torch.randn_like(fake_images) * instance_noise
+            )
+            real_loss = loss_function(discriminator(real_input), real_targets)
             fake_loss = loss_function(
-                discriminator(fake_images.detach()),
+                discriminator(fake_input),
                 fake_targets,
             )
             discriminator_loss = (real_loss + fake_loss) / 2
             discriminator_loss.backward()
+            nn.utils.clip_grad_norm_(discriminator.parameters(), max_norm=5.0)
             discriminator_optimizer.step()
 
+            discriminator_optimizer.zero_grad(set_to_none=True)
+            for parameter in discriminator.parameters():
+                parameter.requires_grad_(False)
             generator_optimizer.zero_grad(set_to_none=True)
-            generator_loss = loss_function(discriminator(fake_images), real_targets)
+            adversarial_loss = loss_function(
+                discriminator(
+                    fake_images + torch.randn_like(fake_images) * instance_noise
+                ),
+                torch.full((size,), 0.9, device=device),
+            )
+            real_structure = nn.functional.adaptive_avg_pool2d(
+                real_images,
+                output_size=(16, 16),
+            )
+            fake_structure = nn.functional.adaptive_avg_pool2d(
+                fake_images,
+                output_size=(16, 16),
+            )
+            structure_loss = nn.functional.l1_loss(
+                fake_structure.mean(dim=0),
+                real_structure.mean(dim=0),
+            )
+            real_pair_distance = torch.abs(
+                real_structure - real_structure.roll(1, dims=0)
+            ).mean()
+            fake_pair_distance = torch.abs(
+                fake_structure - fake_structure.roll(1, dims=0)
+            ).mean()
+            diversity_loss = nn.functional.l1_loss(
+                fake_pair_distance,
+                real_pair_distance,
+            )
+            generator_loss = (
+                adversarial_loss
+                + 2.0 * diversity_loss
+                + 3.0 * structure_loss
+            )
             generator_loss.backward()
+            nn.utils.clip_grad_norm_(generator.parameters(), max_norm=5.0)
             generator_optimizer.step()
+            for parameter in discriminator.parameters():
+                parameter.requires_grad_(True)
 
             generator_loss_total += generator_loss.item()
             discriminator_loss_total += discriminator_loss.item()
+            structure_loss_total += structure_loss.item()
+            diversity_loss_total += diversity_loss.item()
             batch_count += 1
 
         metrics = {
             "epoch": float(epoch + 1),
             "generator_loss": generator_loss_total / batch_count,
             "discriminator_loss": discriminator_loss_total / batch_count,
+            "structure_loss": structure_loss_total / batch_count,
+            "diversity_loss": diversity_loss_total / batch_count,
         }
         history.append(metrics)
         if progress_callback is not None:
             progress_callback(epoch + 1, epochs, metrics)
 
-    CHECKPOINT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    temporary_path = CHECKPOINT_PATH.with_suffix(".tmp")
+    destination = Path(checkpoint_path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = destination.with_suffix(".tmp")
     torch.save(
         {
+            "format_version": CHECKPOINT_FORMAT_VERSION,
+            "architecture": GAN_ARCHITECTURE,
             "generator_state_dict": generator.cpu().state_dict(),
             "image_size": IMAGE_SIZE,
+            "image_channels": 1,
             "latent_dimension": LATENT_DIMENSION,
             "features": FEATURES,
             "epochs": epochs,
             "training_record_count": record_count,
+            "training_data": "procedural_blank_forms_with_abstract_strokes_v1",
             "seed": seed,
+            "history": history,
         },
         temporary_path,
     )
-    os.replace(temporary_path, CHECKPOINT_PATH)
+    os.replace(temporary_path, destination)
     return history
+
+
+def _upscale_generated_image(image: Image.Image) -> Image.Image:
+    return image.convert("L").resize(
+        (OUTPUT_SIZE, OUTPUT_SIZE),
+        Image.Resampling.LANCZOS,
+    ).convert("RGB")
+
+
+def _tensor_to_grayscale_image(image: torch.Tensor) -> Image.Image:
+    pixels = (
+        ((image.detach().cpu().squeeze().clamp(-1, 1) + 1) * 127.5)
+        .round()
+        .to(torch.uint8)
+        .numpy()
+    )
+    if pixels.ndim != 2:
+        pixels = np.squeeze(pixels)
+    return Image.fromarray(pixels, mode="L")
+
+
+def _watermark_image(image: Image.Image) -> Image.Image:
+    image = _upscale_generated_image(image)
+    draw = ImageDraw.Draw(image)
+    banner_top = OUTPUT_SIZE - 58
+    draw.rectangle((0, banner_top, OUTPUT_SIZE, OUTPUT_SIZE), fill=(145, 28, 38))
+    font = ImageFont.load_default()
+    text = SYNTHETIC_IMAGE_BANNER
+    bounds = draw.textbbox((0, 0), text, font=font)
+    text_width = bounds[2] - bounds[0]
+    if text_width > OUTPUT_SIZE - 12:
+        text = "SYNTHETIC - NOT FOR MEDICAL USE"
+        bounds = draw.textbbox((0, 0), text, font=font)
+        text_width = bounds[2] - bounds[0]
+    draw.text(
+        ((OUTPUT_SIZE - text_width) // 2, banner_top + 24),
+        text,
+        fill=(255, 255, 255),
+        font=font,
+    )
+    return image
 
 
 def generate_records(
@@ -296,11 +366,21 @@ def generate_records(
     if not CHECKPOINT_PATH.is_file():
         raise FileNotFoundError(
             f"GAN checkpoint not found: {CHECKPOINT_PATH}. "
-            "Run notebooks/Synthetic_Record_GAN.ipynb to train it."
+            "Run notebooks/GAN_Training.ipynb to train it."
         )
     checkpoint = torch.load(CHECKPOINT_PATH, map_location="cpu", weights_only=True)
     if (
+        checkpoint.get("format_version") != CHECKPOINT_FORMAT_VERSION
+        or checkpoint.get("architecture") != GAN_ARCHITECTURE
+    ):
+        raise ValueError(
+            "The existing GAN checkpoint was trained on the legacy card "
+            "dataset and is incompatible. Retrain it with "
+            "notebooks/GAN_Training.ipynb."
+        )
+    if (
         checkpoint.get("image_size") != IMAGE_SIZE
+        or checkpoint.get("image_channels") != 1
         or checkpoint.get("latent_dimension") != LATENT_DIMENSION
         or checkpoint.get("features") != FEATURES
     ):
@@ -309,7 +389,7 @@ def generate_records(
     generator = Generator()
     generator.load_state_dict(checkpoint["generator_state_dict"], strict=True)
     generator.eval()
-    random_generator = random.Random(seed)
+
     noise_generator = (
         torch.Generator(device="cpu").manual_seed(seed)
         if seed is not None
@@ -325,65 +405,30 @@ def generate_records(
     with torch.inference_mode():
         generated_images = generator(noise)
 
+    id_generator = random.Random(seed)
     results = []
     for generated in generated_images:
-        rgb = ((generated.clamp(-1, 1) + 1) * 127.5).byte()
-        generated_image = Image.fromarray(
-            rgb.permute(1, 2, 0).numpy(),
-            mode="RGB",
-        ).resize((512, 512), Image.Resampling.BICUBIC)
-        record = _make_record(
-            random_generator.randrange(1, 1_000_000),
+        image = _watermark_image(_tensor_to_grayscale_image(generated))
+        record_id = id_generator.randrange(1, 1_000_000)
+        record = FictionalRecord(
+            record_id=f"SYNTHETIC-{record_id:06d}",
+            content="GAN-generated text-free form",
+            status="Synthetic — not for medical use",
         )
-        results.append((record, _compose_card(generated_image, record)))
+        results.append((record, image))
     return results
 
 
-def _compose_card(
-    generated_background: Image.Image,
-    record: FictionalRecord,
-) -> Image.Image:
-    image = generated_background.convert("RGB").filter(
-        ImageFilter.GaussianBlur(radius=16)
-    ).convert("RGBA")
-    overlay = Image.new("RGBA", image.size, (255, 255, 255, 0))
-    draw = ImageDraw.Draw(overlay)
-    draw.rounded_rectangle(
-        (20, 20, 492, 492),
-        radius=18,
-        fill=(255, 254, 249, 255),
-        outline=(75, 116, 119, 255),
-        width=3,
-    )
-    title_font = _font(27)
-    label_font = _font(18)
-    body_font = _font(22)
-    draw.text(
-        (42, 42),
-        "FICTIONAL SYNTHETIC SAMPLE",
-        fill=(31, 61, 64),
-        font=title_font,
-    )
-    draw.line((42, 88, 470, 88), fill=(72, 126, 128, 255), width=3)
-    rows = [
-        ("SAMPLE ID", record.record_id),
-        ("CONTENT", record.content),
-        ("STATUS", record.status),
+def records_as_dicts(records: list[FictionalRecord]) -> list[dict[str, Any]]:
+    return [
+        {
+            "SampleID": record.record_id,
+            "Patient": getattr(record, "patient_name", "Synthetic Patient"),
+            "Age": getattr(record, "patient_age", 40),
+            "Gender": getattr(record, "patient_gender", "Unspecified"),
+            "Doctor": getattr(record, "doctor_name", "Dr. Staff, MD"),
+            "content": record.content,
+            "status": record.status,
+        }
+        for record in records
     ]
-    y = 108
-    for label, value in rows:
-        draw.text((44, y), label, fill=(100, 111, 115), font=label_font)
-        draw.text((205, y), value, fill=(34, 52, 60), font=body_font)
-        y += 48
-    draw.rectangle((0, 438, 512, 512), fill=(153, 39, 45, 255))
-    draw.text(
-        (35, 458),
-        SYNTHETIC_IMAGE_BANNER,
-        fill=(255, 255, 255),
-        font=_font(22),
-    )
-    return Image.alpha_composite(image, overlay).convert("RGB")
-
-
-def records_as_dicts(records: list[FictionalRecord]) -> list[dict[str, str]]:
-    return [asdict(record) for record in records]

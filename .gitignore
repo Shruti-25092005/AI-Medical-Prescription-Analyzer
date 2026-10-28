@@ -27,3 +27,9 @@ generated_images/
 .DS_Store
 Thumbs.db
 models/transformer/best_trocr_model/model.safetensors
+scratch/
+
+AI_Prescription_Analyzer/
+_backups_pre_improvement/
+trocr_deploy/
+.streamlit/credentials.toml

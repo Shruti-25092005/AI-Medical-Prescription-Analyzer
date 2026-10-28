@@ -22,6 +22,8 @@ class PrescriptionPage:
     page_number: int
     image: Image.Image | None
     error: str | None = None
+    selectable_text: str | None = None
+    has_selectable_text: bool = False
 
 
 class UploadValidationError(ValueError):
@@ -128,6 +130,7 @@ def _load_pdf_pages(content: bytes) -> list[PrescriptionPage]:
         for index in range(page_count):
             pdf_page = None
             bitmap = None
+            textpage = None
             try:
                 pdf_page = document[index]
                 width, height = pdf_page.get_size()
@@ -145,7 +148,27 @@ def _load_pdf_pages(content: bytes) -> list[PrescriptionPage]:
                     )
                 bitmap = pdf_page.render(scale=PDF_RENDER_SCALE)
                 image = bitmap.to_pil().convert("RGB").copy()
-                pages.append(PrescriptionPage(page_number=index + 1, image=image))
+
+                # Check for selectable text
+                selectable_text = None
+                has_selectable_text = False
+                try:
+                    textpage = pdf_page.get_textpage()
+                    extracted = textpage.get_text_range()
+                    if extracted and len(extracted.strip()) > 5:
+                        selectable_text = extracted.strip()
+                        has_selectable_text = True
+                except Exception:
+                    pass
+
+                pages.append(
+                    PrescriptionPage(
+                        page_number=index + 1,
+                        image=image,
+                        selectable_text=selectable_text,
+                        has_selectable_text=has_selectable_text,
+                    )
+                )
             except UploadValidationError:
                 raise
             except (OSError, RuntimeError, ValueError, IndexError):
@@ -157,6 +180,11 @@ def _load_pdf_pages(content: bytes) -> list[PrescriptionPage]:
                     )
                 )
             finally:
+                if textpage is not None:
+                    try:
+                        textpage.close()
+                    except Exception:
+                        pass
                 if bitmap is not None:
                     bitmap.close()
                 if pdf_page is not None:

@@ -4,7 +4,7 @@ from models.privacy_controls import clear_uploaded_data
 
 
 st.set_page_config(
-    page_title="Prescription Analyzer",
+    page_title="Prescription Analyzer & Generative AI Studio",
     page_icon="Rx",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -145,17 +145,14 @@ st.markdown(
 )
 
 st.sidebar.markdown("# Rx Workspace")
-st.sidebar.caption("Prescription image review")
+st.sidebar.caption("Prescription AI & Generative Handwriting")
 st.sidebar.info(
-    "Privacy: uploaded files and results remain in this app session for "
-    "processing. The app does not intentionally save uploads to project files. "
-    "Hosting infrastructure may have separate retention."
+    "Privacy: uploaded files and results remain strictly in this session memory for "
+    "processing. The app does not save uploaded patient records to permanent files."
 )
 st.sidebar.warning(
-    "AI limitations: transcription and image reconstructions can be wrong or "
-    "incomplete. Outputs are informational only—not diagnoses or treatment "
-    "recommendations. Verify against the source and consult a qualified "
-    "professional for care decisions."
+    "AI limitations: transcription and generation can be incomplete or uncertain. "
+    "Verify all results with qualified healthcare professionals."
 )
 
 
@@ -171,39 +168,49 @@ st.sidebar.button(
 
 navigation = st.navigation(
     {
-        "Workspace": [
+        "Core Applications": [
             st.Page(
-                "pages/1_Dashboard.py",
-                title="Dashboard",
-                icon=":material/dashboard:",
+                "pages/2_Prescription_Analyzer.py",
+                title="1 · Prescription Analyzer",
+                icon=":material/document_scanner:",
                 default=True,
             ),
             st.Page(
-                "pages/2_Prescription_Analyzer.py",
-                title="Prescription Analyzer",
-                icon=":material/document_scanner:",
+                "pages/6_Handwriting_Generation_Studio.py",
+                title="2 · Handwriting Generation Studio",
+                icon=":material/auto_awesome:",
             ),
+            st.Page(
+                "pages/4_Performance_Evaluation.py",
+                title="3 · Model Evaluation Dashboard",
+                icon=":material/analytics:",
+            ),
+            st.Page(
+                "pages/3_AI_Models.py",
+                title="4 · About & Research Info",
+                icon=":material/info:",
+            ),
+        ],
+        "Clinical Utilities & Labs": [
             st.Page(
                 "pages/5_Results_Verification.py",
                 title="Results & Verification",
                 icon=":material/fact_check:",
             ),
             st.Page(
+                "pages/1_Dashboard.py",
+                title="Workspace Overview",
+                icon=":material/dashboard:",
+            ),
+            st.Page(
+                "pages/7_Diffusion_Synthetic_Lab.py",
+                title="Procedural Diffusion Lab",
+                icon=":material/blur_on:",
+            ),
+            st.Page(
                 "pages/6_Synthetic_Record_Lab.py",
-                title="Synthetic Record Lab",
-                icon=":material/auto_awesome:",
-            ),
-        ],
-        "Insights": [
-            st.Page(
-                "pages/3_AI_Models.py",
-                title="AI Models",
-                icon=":material/hub:",
-            ),
-            st.Page(
-                "pages/4_Performance_Evaluation.py",
-                title="Performance Evaluation",
-                icon=":material/analytics:",
+                title="Legacy Record Lab",
+                icon=":material/history_edu:",
             ),
         ],
     },

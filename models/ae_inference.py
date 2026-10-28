@@ -119,19 +119,14 @@ def enhance_reconstruction(image):
     lab = cv2.cvtColor(rgb, cv2.COLOR_RGB2LAB)
     lightness, chroma_a, chroma_b = cv2.split(lab)
 
-    denoised = cv2.fastNlMeansDenoising(
-        lightness,
-        None,
-        h=2,
-        templateWindowSize=7,
-        searchWindowSize=21,
-    )
+    filtered = cv2.bilateralFilter(lightness, d=5, sigmaColor=30, sigmaSpace=30)
     contrast = cv2.createCLAHE(
-        clipLimit=1.25,
+        clipLimit=1.5,
         tileGridSize=(8, 8),
-    ).apply(denoised)
-    soft_edges = cv2.GaussianBlur(contrast, (0, 0), sigmaX=0.7)
-    sharpened = cv2.addWeighted(contrast, 1.5, soft_edges, -0.5, 0)
+    ).apply(filtered)
+    gaussian = cv2.GaussianBlur(contrast, (0, 0), sigmaX=1.0)
+    sharpened = cv2.addWeighted(contrast, 1.4, gaussian, -0.4, 0)
+    sharpened = np.where(sharpened > 242, 255, sharpened).astype(np.uint8)
 
     enhanced_lab = cv2.merge((sharpened, chroma_a, chroma_b))
     enhanced_rgb = cv2.cvtColor(enhanced_lab, cv2.COLOR_LAB2RGB)
